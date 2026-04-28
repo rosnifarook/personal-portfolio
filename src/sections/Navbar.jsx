@@ -15,17 +15,7 @@ function Navigation() {
       </li>
       <li className="nav-li">
         <a className="nav-link" href="#work">
-          Projects
-        </a>
-      </li>
-      <li className="nav-li">
-        <a className="nav-link" href="#experience">
-          Experience
-        </a>
-      </li>
-      <li className="nav-li">
-        <a className="nav-link" href="#blogs">
-          Blogs
+          Work
         </a>
       </li>
       <li className="nav-li">
@@ -48,16 +38,6 @@ const Navbar = () => {
           >
             Rosni
           </a>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="flex cursor-pointer text-neutral-400 hover:text-white focus:outline-none sm:hidden"
-          >
-            <img
-              src={isOpen ? "assets/close.svg" : "assets/menu.svg"}
-              className="w-6 h-6"
-              alt="toggle"
-            />
-          </button>
           <nav className="hidden sm:flex">
             <Navigation />
           </nav>
