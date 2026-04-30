@@ -8,7 +8,7 @@ export const myProjects = [
       "Independently developed a retro-themed quiz game with sound effects and dynamic gameplay, integrating Firebase for secure authentication and real-time leaderboards, with user data stored in Firestore.",
       "Made sure players can sign up and log in to save their scores, added three different difficulty levels to make the game fun for everyone, and created a ranking system to show who's the best player.",
     ],
-    href: "",
+    href: "https://quiz-buzz-game-app.vercel.app/",
     logo: "",
     image: "/assets/projects/banana-rush.png",
     tags: [
