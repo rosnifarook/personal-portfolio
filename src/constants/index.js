@@ -244,7 +244,7 @@ export const mySocials = [
 export const experiences = [
   {
     title: "Software Engineer Intern",
-    job: "Enhanced Company Website",
+    job: "Huegin Clothing (Pvt) Ltd",
     date: "2024/01-2024/06",
     contents: [
       "Collaborated on R&D projects for a major client, enhancing their software solutions with a focus on user experience.",
