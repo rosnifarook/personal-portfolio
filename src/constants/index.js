@@ -1,14 +1,12 @@
 export const myProjects = [
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "Banana Rush",
     description:
-      "Facilitates purchases from international websites like Amazon and eBay, allowing customers to shop from these sites and have products delivered domestically.",
+      "A retro-themed quiz game with sound effects and dynamic gameplay.",
     subDescription: [
-      "Built a scalable application with ASP.NET Core MVC, integrating global platforms like Amazon for domestic delivery.",
-      "Implemented secure authentication and database management using ASP.NET Core Identity and Entity Framework Core.",
-      "Designed a responsive frontend with Tailwind CSS, enhancing user experience.",
-      "Added payment systems, localization, and product filtering for functionality improvements.",
+      "Independently developed a retro-themed quiz game with sound effects and dynamic gameplay, integrating Firebase for secure authentication and real-time leaderboards, with user data stored in Firestore.",
+      "Made sure players can sign up and log in to save their scores, added three different difficulty levels to make the game fun for everyone, and created a ranking system to show who's the best player.",
     ],
     href: "",
     logo: "",
@@ -16,17 +14,17 @@ export const myProjects = [
     tags: [
       {
         id: 1,
-        name: "C#",
+        name: "React",
         path: "/assets/logos/csharp.svg",
       },
       {
         id: 2,
-        name: ".Net",
+        name: "Banana Quiz API",
         path: "/assets/logos/dotnet.svg",
       },
       {
         id: 3,
-        name: "Ef Core",
+        name: "Firebase,",
         path: "/assets/logos/efcore.png",
       },
       {
