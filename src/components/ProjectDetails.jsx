@@ -1,4 +1,14 @@
 import { motion } from "motion/react";
+import { FaReact, FaServer } from "react-icons/fa";
+import { SiFirebase, SiTailwindcss } from "react-icons/si";
+
+const tagIconMap = {
+  react: FaReact,
+  api: FaServer,
+  firebase: SiFirebase,
+  tailwind: SiTailwindcss,
+};
+
 const ProjectDetails = ({
   title,
   description,
@@ -37,14 +47,31 @@ const ProjectDetails = ({
           ))}
           <div className="flex items-center justify-between mt-4">
             <div className="flex gap-3">
-              {tags.map((tag) => (
-                <img
-                  key={tag.id}
-                  src={tag.path}
-                  alt={tag.name}
-                  className="rounded-lg size-10 hover-animation"
-                />
-              ))}
+              {tags.map((tag) => {
+                const Icon = tag.icon ? tagIconMap[tag.icon] : null;
+
+                if (Icon) {
+                  return (
+                    <span
+                      key={tag.id}
+                      className="flex items-center justify-center rounded-lg size-10 hover-animation bg-white/5"
+                      title={tag.name}
+                      aria-label={tag.name}
+                    >
+                      <Icon className="text-2xl text-white" />
+                    </span>
+                  );
+                }
+
+                return (
+                  <img
+                    key={tag.id}
+                    src={tag.path}
+                    alt={tag.name}
+                    className="rounded-lg size-10 hover-animation"
+                  />
+                );
+              })}
             </div>
             <a
               href={href}

@@ -15,22 +15,22 @@ export const myProjects = [
       {
         id: 1,
         name: "React",
-        path: "/assets/logos/csharp.svg",
+        icon: "react",
       },
       {
         id: 2,
         name: "Banana Quiz API",
-        path: "/assets/logos/dotnet.svg",
+        icon: "api",
       },
       {
         id: 3,
-        name: "Firebase,",
-        path: "/assets/logos/efcore.png",
+        name: "Firebase",
+        icon: "firebase",
       },
       {
         id: 4,
         name: "TailwindCSS",
-        path: "/assets/logos/tailwindcss.svg",
+        icon: "tailwind",
       },
     ],
   },
