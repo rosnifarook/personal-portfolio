@@ -1,12 +1,47 @@
 import { motion } from "motion/react";
-import { FaReact, FaServer } from "react-icons/fa";
-import { SiFirebase, SiTailwindcss } from "react-icons/si";
+import {
+  FaCode,
+  FaCloud,
+  FaCss3Alt,
+  FaDatabase,
+  FaGitAlt,
+  FaHtml5,
+  FaReact,
+  FaServer,
+  FaWindows,
+  FaWordpress,
+} from "react-icons/fa";
+import {
+  SiAuth0,
+  SiBlazor,
+  SiFirebase,
+  SiSqlite,
+  SiStripe,
+  SiTailwindcss,
+  SiVite,
+  SiDotnet,
+} from "react-icons/si";
 
 const tagIconMap = {
   react: FaReact,
   api: FaServer,
   firebase: SiFirebase,
   tailwind: SiTailwindcss,
+  auth0: SiAuth0,
+  sqlite: SiSqlite,
+  blazor: SiBlazor,
+  dotnet: SiDotnet,
+  cplusplus: FaCode,
+  csharp: FaCode,
+  git: FaGitAlt,
+  microsoft: FaWindows,
+  wordpress: FaWordpress,
+  html5: FaHtml5,
+  css3: FaCss3Alt,
+  vite: SiVite,
+  azure: FaCloud,
+  stripe: SiStripe,
+  sql: FaDatabase,
 };
 
 const ProjectDetails = ({

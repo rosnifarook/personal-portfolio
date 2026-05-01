@@ -10,6 +10,7 @@ export function OrbitingCircles({
   path = true,
   iconSize = 30,
   speed = 1,
+  paused = false,
   ...props
 }) {
   const calculatedDuration = duration / speed;
@@ -43,7 +44,7 @@ export function OrbitingCircles({
             className={twMerge(
               `absolute flex size-[var(--icon-size)] transform-gpu animate-orbit items-center justify-center rounded-full ${
                 reverse ? "[animation-direction:reverse]" : ""
-              }`,
+              } ${paused ? "[animation-play-state:paused]" : ""}`,
               className
             )}
             {...props}

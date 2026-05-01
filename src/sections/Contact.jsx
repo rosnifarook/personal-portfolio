@@ -3,7 +3,13 @@ import emailjs from "@emailjs/browser";
 import { useInView } from "motion/react";
 import Alert from "../components/Alert";
 import { Particles } from "../components/Particles";
+
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
 const Contact = () => {
+  const contactEmail = "rosnifarook@gmail.com";
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { amount: 0.15 });
   const [formData, setFormData] = useState({
@@ -15,8 +21,25 @@ const Contact = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("success");
   const [alertMessage, setAlertMessage] = useState("");
+  const [emailCopied, setEmailCopied] = useState(false);
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === "name") {
+      // Keep name input clean: letters, spaces, apostrophes, dots, and hyphens only.
+      const sanitizedName = value.replace(/[^A-Za-z\s'.-]/g, "");
+      setFormData({ ...formData, [name]: sanitizedName });
+      return;
+    }
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(contactEmail);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (error) {
+      showAlertMessage("danger", "Could not copy email.");
+    }
   };
   const showAlertMessage = (type, message) => {
     setAlertType(type);
@@ -31,26 +54,31 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      console.log("From submitted:", formData);
+      if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+        throw new Error(
+          "Email service is not configured. Add VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in your .env file."
+        );
+      }
+
       await emailjs.send(
-        "service_79b0nyj",
-        "template_17us8im",
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         {
-          from_name: formData.name,
+          from_name: formData.name.trim(),
           to_name: "Rosni",
-          from_email: formData.email,
-          to_email: "rosnifarook@gmail.com",
-          message: formData.message,
+          from_email: formData.email.trim(),
+          to_email: contactEmail,
+          message: formData.message.trim(),
         },
-        "pn-Bw_mS1_QQdofuV"
+        EMAILJS_PUBLIC_KEY
       );
       setIsLoading(false);
       setFormData({ name: "", email: "", message: "" });
-      showAlertMessage("success", "You message has been sent!");
+      showAlertMessage("success", "Your message has been sent!");
     } catch (error) {
       setIsLoading(false);
-      console.log(error);
-      showAlertMessage("danger", "Somthing went wrong!");
+      const reason = error?.text || error?.message || "Unknown error";
+      showAlertMessage("danger", `Message failed: ${reason}`);
     }
   };
   return (
@@ -70,11 +98,41 @@ const Contact = () => {
       {showAlert && <Alert type={alertType} text={alertMessage} />}
       <div className="flex flex-col items-center justify-center max-w-md p-5 mx-auto border border-white/10 rounded-2xl bg-primary">
         <div className="flex flex-col items-start w-full gap-5 mb-10">
-          <h2 className="text-heading">Let's Talk</h2>
+          <div className="flex items-center justify-between w-full gap-3">
+            <h2 className="text-heading">Let's Talk</h2>
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              className="px-3 py-2 text-xs border rounded-full cursor-pointer border-white/20 bg-white/5 hover:bg-white/10"
+            >
+              {emailCopied ? "Email copied!" : "Copy Email"}
+            </button>
+          </div>
           <p className="font-normal text-neutral-400">
             Whether you're loking to build a new website, improve your existing
             platform, or bring a unique project to life, I'm here to help
           </p>
+          <div className="flex flex-wrap gap-3 text-sm text-white/80">
+            <a href={`mailto:${contactEmail}`} className="hover:text-white">
+              {contactEmail}
+            </a>
+            <a
+              href="https://www.linkedin.com/in/rosni-farook/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/rosnifarook"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
+              GitHub
+            </a>
+          </div>
         </div>
         <form className="w-full" onSubmit={handleSubmit}>
           <div className="mb-5">
@@ -91,6 +149,10 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
+              minLength={2}
+              maxLength={60}
+              pattern="^[A-Za-z][A-Za-z\s'.-]{1,59}$"
+              title="Please enter a valid name (2-60 characters)."
             />
           </div>
           <div className="mb-5">
@@ -107,6 +169,8 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
+              maxLength={100}
+              title="Please enter a valid email address."
             />
           </div>
           <div className="mb-5">
@@ -124,14 +188,21 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               required
+              minLength={10}
+              maxLength={1000}
+              title="Message must be between 10 and 1000 characters."
             />
           </div>
           <button
             type="submit"
+            disabled={isLoading}
             className="w-full px-1 py-3 text-lg text-center rounded-md cursor-pointer bg-radial from-lavender to-royal hover-animation"
           >
             {!isLoading ? "Send" : "Sending..."}
           </button>
+          <p className="mt-3 text-xs text-center text-white/60">
+            I usually reply within 24 hours.
+          </p>
         </form>
       </div>
     </section>

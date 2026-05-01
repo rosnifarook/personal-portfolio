@@ -89,7 +89,7 @@ body {
 }
 
 .nav-link {
-  @apply text-lg md:text-base hover:text-white transition-colors;
+  @apply text-sm md:text-base font-medium tracking-wide hover:text-white transition-colors;
 }
 /* Button Components */
 .btn {
