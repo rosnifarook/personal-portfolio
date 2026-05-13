@@ -36,38 +36,62 @@ export const myProjects = [
   },
   {
     id: 2,
-    title: "Authentication & Authorization System",
+    title: "Readify",
     description:
-      "A secure authentication and authorization system using Auth0 for seamless user management.",
+      "A full-stack e-commerce web application for online book browsing and purchasing with secure authentication and role-based access control.",
     subDescription: [
-      "Integrated Auth0 for authentication, supporting OAuth, JWT, and multi-factor authentication.",
-      "Implemented role-based access control (RBAC) for fine-grained user permissions.",
-      "Developed a React-based frontend with Tailwind CSS for a sleek user experience.",
-      "Connected to a secure SQLite database for user data storage.",
+      "An e-commerce web application that allows customers to browse and purchase books online with integrated Asgardeo and Firebase authentication including Google sign-in.",
+      "Built features like cash on delivery processing, shopping cart, role-based access control and achieving positive feedback from 82% of users who confirmed improved book browsing and efficient order management.",
+      "Published a Medium article explaining Asgardeo integration in React app for streamlined authentication and Choreo deployment, demonstrating technical proficiency.",
     ],
     href: "",
     logo: "",
-    image: "/assets/projects/auth-system.jpg",
+    image: "/assets/projects/readify.png",
     tags: [
       {
         id: 1,
-        name: "Auth0",
-        icon: "auth0",
-      },
-      {
-        id: 2,
         name: "React",
         icon: "react",
       },
       {
+        id: 2,
+        name: "Node.js",
+        icon: "node",
+      },
+      {
         id: 3,
-        name: "SQLite",
-        icon: "sqlite",
+        name: "Express.js",
+        icon: "express",
       },
       {
         id: 4,
-        name: "TailwindCSS",
-        icon: "tailwind",
+        name: "MongoDB",
+        icon: "mongodb",
+      },
+      {
+        id: 5,
+        name: "Firebase",
+        icon: "firebase",
+      },
+      {
+        id: 6,
+        name: "Asgardeo",
+        icon: "asgardeo",
+      },
+      {
+        id: 7,
+        name: "Redux Toolkit",
+        icon: "redux",
+      },
+      {
+        id: 8,
+        name: "JWT",
+        icon: "jwt",
+      },
+      {
+        id: 9,
+        name: "Choreo",
+        icon: "choreo",
       },
     ],
   },

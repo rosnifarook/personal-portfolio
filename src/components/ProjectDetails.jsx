@@ -6,7 +6,9 @@ import {
   FaDatabase,
   FaGitAlt,
   FaHtml5,
+  FaNodeJs,
   FaReact,
+  FaRocket,
   FaServer,
   FaWindows,
   FaWordpress,
@@ -14,16 +16,24 @@ import {
 import {
   SiAuth0,
   SiBlazor,
+  SiDotnet,
+  SiExpress,
   SiFirebase,
+  SiJsonwebtokens,
+  SiMongodb,
+  SiOpenid,
+  SiRedux,
   SiSqlite,
   SiStripe,
   SiTailwindcss,
   SiVite,
-  SiDotnet,
 } from "react-icons/si";
 
 const tagIconMap = {
   react: FaReact,
+  node: FaNodeJs,
+  express: SiExpress,
+  mongodb: SiMongodb,
   api: FaServer,
   firebase: SiFirebase,
   tailwind: SiTailwindcss,
@@ -42,6 +52,10 @@ const tagIconMap = {
   azure: FaCloud,
   stripe: SiStripe,
   sql: FaDatabase,
+  redux: SiRedux,
+  jwt: SiJsonwebtokens,
+  asgardeo: SiOpenid,
+  choreo: FaRocket,
 };
 
 const ProjectDetails = ({
@@ -81,7 +95,7 @@ const ProjectDetails = ({
             </p>
           ))}
           <div className="flex items-center justify-between mt-4">
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3 max-w-md">
               {tags.map((tag) => {
                 const Icon = tag.icon ? tagIconMap[tag.icon] : null;
 
@@ -98,14 +112,18 @@ const ProjectDetails = ({
                   );
                 }
 
-                return (
-                  <img
-                    key={tag.id}
-                    src={tag.path}
-                    alt={tag.name}
-                    className="rounded-lg size-10 hover-animation"
-                  />
-                );
+                if (tag.path) {
+                  return (
+                    <img
+                      key={tag.id}
+                      src={tag.path}
+                      alt={tag.name}
+                      className="rounded-lg size-10 hover-animation"
+                    />
+                  );
+                }
+
+                return null;
               })}
             </div>
             <a
