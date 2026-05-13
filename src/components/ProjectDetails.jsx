@@ -58,6 +58,16 @@ const tagIconMap = {
   choreo: FaRocket,
 };
 
+/** Choreo/production URLs without `https://` are treated as paths on the current origin (e.g. GitHub Pages), which loads the SPA again instead of the external app. */
+function externalProjectUrl(href) {
+  if (!href || typeof href !== "string") return "";
+  const trimmed = href.trim();
+  if (!trimmed) return "";
+  if (trimmed.startsWith("//")) return `https:${trimmed}`;
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
 const ProjectDetails = ({
   title,
   description,
@@ -67,6 +77,8 @@ const ProjectDetails = ({
   href,
   closeModal,
 }) => {
+  const projectUrl = externalProjectUrl(href);
+
   return (
     <div
       className="fixed inset-0 z-[60] flex items-center justify-center w-full h-full overflow-hidden backdrop-blur-sm"
@@ -126,15 +138,22 @@ const ProjectDetails = ({
                 return null;
               })}
             </div>
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-medium cursor-pointer hover-animation"
-            >
-              View Project{" "}
-              <img src="/assets/arrow-up.svg" alt="Open project link" className="size-4" />
-            </a>
+            {projectUrl ? (
+              <a
+                href={projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1 font-medium cursor-pointer hover-animation"
+              >
+                View Project{" "}
+                <img src="/assets/arrow-up.svg" alt="Open project link" className="size-4" />
+              </a>
+            ) : (
+              <span className="inline-flex items-center gap-1 font-medium text-neutral-500 cursor-default">
+                No live demo
+              </span>
+            )}
           </div>
         </div>
       </motion.div>
