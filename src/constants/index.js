@@ -44,7 +44,7 @@ export const myProjects = [
       "Built features like cash on delivery processing, shopping cart, role-based access control and achieving positive feedback from 82% of users who confirmed improved book browsing and efficient order management.",
       "Published a Medium article explaining Asgardeo integration in React app for streamlined authentication and Choreo deployment, demonstrating technical proficiency.",
     ],
-    href: "",
+    href: "https://08c118b9-7fba-4454-bbdc-1d315f882345.e1-us-east-azure.choreoapps.dev/",
     logo: "",
     image: "/assets/projects/readify.png",
     tags: [
